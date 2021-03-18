@@ -1,0 +1,75 @@
+@import './iconfont/iconfont.css';
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body {
+    background-color: #f5f5f5;
+    height: 2000px;
+}
+
+.wrapper {
+    margin-top: 2rem;
+}
+
+#video-floor {
+    margin: 0 auto;
+    list-style: none;
+    max-width: 1296px;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+#video-floor li {
+    background: #fff;
+    margin-right: 1rem;
+    cursor: pointer;
+    transition: transform .2s;
+    will-change: transform;
+    min-height: 17.5rem;
+}
+#video-floor li:hover {
+    box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+    transform: translate3d(0,-2px,0);
+}
+
+#video-floor div {
+    position: relative;
+}
+#video-floor li img {
+    width: 300px;
+    pointer-events: unset;
+}
+#video-floor li i {
+    position: absolute;
+    color: white;
+    left: 1rem;
+    bottom: .75rem;
+    border: 2px solid white;
+    padding: .15rem .5rem;
+    border-radius: .5rem;
+    transition: background 300ms;
+    font-size: .75rem;
+}
+#video-floor li div:hover i {
+    background-color: #ff6700;
+}
+
+#video-floor li h3, 
+#video-floor li h4 {
+    text-align: center;
+    font-weight: normal;
+}
+#video-floor li h3 {
+    margin-top: 2rem;
+    font-size: 14px;
+}
+#video-floor li h4 {
+    font-size: 12px;
+    color: #777777;
+    margin-top: .5rem;
+    margin-bottom: 2rem;
+}
