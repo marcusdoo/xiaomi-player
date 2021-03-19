@@ -30,7 +30,7 @@ module.exports = {
                     }
                 }] 
             },
-            { test: /\.(eot|svg|woff|woff2|ttf)$/i, use: ['file-loader'] },
+            { test: /\.(eot|svg|woff|woff2|ttf|png)$/i, use: ['file-loader'] },
             { test: /\.tsx?$/i, use: ['ts-loader'], exclude: ['/node_modules/'] },
             // {
             //     // faster(maybe?) alternatives
@@ -51,7 +51,8 @@ module.exports = {
     },
     plugins: [
         new HtmlWebpackPlugin({
-        template: './src/index.html'
+            favicon: 'favicon.png',
+            template: './src/index.html'
         }),
         new CleanPlugin()
     ],
