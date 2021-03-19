@@ -1,4 +1,5 @@
 import popup from './components/popup/popup'
+import video from './components/videoPlayer/videoPlayer'
 import './main.css'
 
 /** we run `displayVideoFloor` and console.log(document.documentElement.innerHTML)
@@ -19,7 +20,10 @@ listItems.forEach((item) => {
         popup({
             title,
             content: (el) => {
-                console.log(el)
+                video({
+                    el,
+                    url
+                })
             },
             width: '55rem',
             height: '35rem',

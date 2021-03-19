@@ -1,6 +1,17 @@
 // const styles = require('./popup.module.css').default
 import styles from './popup.module.css'
 
+type PopupConfig = Partial<{
+    width: string
+    height: string
+    title: string
+    pos: | 'left' 
+        | 'center' 
+        | 'right'
+    mask: boolean
+    content: (el: HTMLElement) => void
+}>
+
 function popup (options: PopupConfig) {
     return new Popup(options)
 }
@@ -10,14 +21,12 @@ class Popup implements Component {
     mask: HTMLElement
     constructor (private settings: PopupConfig) {
         this.settings = {
-            ...{
-                width: '100%',
-                height: '100%',
-                title: '',
-                pos: 'center',
-                mask: true,
-                content: () => {}
-            },
+            width: '100%',
+            height: '100%',
+            title: '',
+            pos: 'center',
+            mask: true,
+            content: () => {},
             ...this.settings
         }
 
@@ -52,7 +61,7 @@ class Popup implements Component {
                 <h3>${title}</h3>
                 <i class="iconfont icon-close"></i>
             </div>
-            <div class=${styles['popup-content']}></div>
+            <div id="popup-content" class=${styles['popup-content']}></div>
         `
         document.body.appendChild(this.container)
     }
