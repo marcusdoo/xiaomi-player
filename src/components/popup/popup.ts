@@ -1,22 +1,5 @@
 // const styles = require('./popup.module.css').default
 import styles from './popup.module.css'
-type PopupConfig = Partial<{
-    width: string
-    height: string
-    title: string
-    pos: | 'left' 
-        | 'center' 
-        | 'right'
-    mask: boolean
-    content: (el: HTMLElement) => void
-}>
-
-interface Component {
-    container: HTMLElement
-    init: () => void
-    template: () => void
-    handle: () => void
-}
 
 function popup (options: PopupConfig) {
     return new Popup(options)
