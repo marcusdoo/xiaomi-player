@@ -72,7 +72,7 @@ module.exports = {
         }),
         new CleanPlugin(),
         new MiniCssExtractPlugin({
-            filename: '[name].[contenthash].css'
+            filename: '[name].[contenthash].css',
         })
     ],
     resolve: {
