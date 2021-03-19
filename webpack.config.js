@@ -1,9 +1,13 @@
 const path = require('path')
 const { CleanPlugin } = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
+
+const isProd = process.env.mode === 'prod'
 
 module.exports = {
-    mode: 'development',
+    mode: isProd ? 'development' : 'production',
     entry: './src/main.ts',
     output: {
         path: path.resolve(__dirname, 'dist'),
@@ -15,22 +19,33 @@ module.exports = {
         hot: true,
         // open: true, // automatically open the browser
         // compress: true, // disable this for HMR
-      },
+    },
     module: {
         rules: [
             { 
                 test: /\.css$/i, 
-                use: ['style-loader', {
-                    loader: 'css-loader',
-                    options: {
-                        modules: {
-                            auto: (resourcePath) => resourcePath.endsWith('.module.css'),
-                            localIdentName: 'mi__[local]--[hash:base64:5]'
+                use: [
+                    isProd ? MiniCssExtractPlugin.loader : 'style-loader', 
+                    {
+                        loader: 'css-loader',
+                        options: {
+                            modules: {
+                                auto: (resourcePath) => resourcePath.endsWith('.module.css'),
+                                localIdentName: 'mi__[local]--[hash:base64:5]'
+                            }
                         }
+                    }
+                ] 
+            },
+            { 
+                test: /\.(eot|svg|woff|woff2|ttf|png)$/i, 
+                use: [{
+                    loader: 'file-loader',
+                    options: {
+                        outputPath: 'iconfont'
                     }
                 }] 
             },
-            { test: /\.(eot|svg|woff|woff2|ttf|png)$/i, use: ['file-loader'] },
             { test: /\.tsx?$/i, use: ['ts-loader'], exclude: ['/node_modules/'] },
             // {
             //     // faster(maybe?) alternatives
@@ -54,9 +69,18 @@ module.exports = {
             favicon: 'favicon.png',
             template: './src/index.html'
         }),
-        new CleanPlugin()
+        new CleanPlugin(),
+        new MiniCssExtractPlugin({
+            filename: '[name].[contenthash].js'
+        })
     ],
     resolve: {
         extensions: ['.tsx', '.ts', '.js', 'json'],
     },
+    optimization: {
+        minimize: true,
+        minimizer: [
+            new CssMinimizerPlugin(),
+        ]
+    }
 }
