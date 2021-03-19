@@ -8,6 +8,7 @@ const isProd = process.env.mode === 'prod'
 
 module.exports = {
     mode: isProd ? 'development' : 'production',
+    target: ['web', 'es5'],
     entry: './src/main.ts',
     output: {
         path: path.resolve(__dirname, 'dist'),
@@ -71,7 +72,7 @@ module.exports = {
         }),
         new CleanPlugin(),
         new MiniCssExtractPlugin({
-            filename: '[name].[contenthash].js'
+            filename: '[name].[contenthash].css'
         })
     ],
     resolve: {
