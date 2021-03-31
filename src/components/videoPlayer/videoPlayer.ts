@@ -77,7 +77,10 @@ class Video implements Component {
     getAllElement (selector: string): NodeList {
         return this.container.querySelectorAll(selector)
     }
-
+    
+    qsa (selector: TemplateStringsArray): NodeList {
+        return this.container.querySelectorAll(selector.raw[0])
+    }
 
     handle () {
         const playToggleEl = this.getElement(`.${styles['play-toggle']}`)
